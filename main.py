@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 import os
 from fastapi.middleware.cors import CORSMiddleware
-
+from mangum import Mangum
 
 app = FastAPI()
 
@@ -36,3 +36,5 @@ async def calculate(num1: float, operation: str, num2: float):
         result = num1 / num2
 
     return {"result": result}
+
+handler = Mangum(app)
